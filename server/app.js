@@ -4,7 +4,9 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 var pg = require('pg');
-var connectionString = 'postgres://localhost:5432/solo_project';
+var connectionString = 'postgres://hmjdomjolyizcc:GMyFYo2RyHT8W-AW1jnippnPhm@ec2-54-243-203-98.compute-1.amazonaws.com:5432/d6fdol6lt5p8g1';
+
+pg.defaults.ssl = true;
 
 app.listen(3000, 'localhost', function(){
   console.log('listening on 3000');
@@ -25,7 +27,7 @@ app.post('/sendToDb', urlencodedParser, function(req, res){
     else{
       // var namer = cleanString( req.body.Name );
 
-      var q = "INSERT INTO players (name, position, team, bye, adp) VALUES ('" + req.body.Name + "', '" + req.body.Position + "','" + req.body.Team + "', '" + req.body.Bye + "', '" + req.body.AverageDraftPosition + "')";
+      var q = "INSERT INTO players (name, position, team, adp) VALUES ('" + req.body.Name + "', '" + req.body.Position + "','" + req.body.Team + "', '" + req.body.AverageDraftPosition + "')";
 
       console.log( "q: " + q );
       client.query( q );
